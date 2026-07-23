@@ -137,10 +137,18 @@ header p {
 
 .preview {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  max-height: 480px;
+  object-fit: contain;
   border: none;
   border-radius: 14px;
   background: var(--off-white);
+  display: block;
+}
+
+.login {
+  display: flex;
+  justify-content: center;
+  margin-top: 24px;
 }
 
 footer {
