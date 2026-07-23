@@ -99,7 +99,6 @@ function App() {
 
       <footer>
         <span>SIEG · Institucional</span>
-        <span>sieg.com.br</span>
       </footer>
     </div>
   );

@@ -18,8 +18,12 @@ Ferramenta interna
 - Prazo: pronto ainda hoje (2026-07-23). Escopo deve ficar enxuto pra bater o prazo.
 
 ## Arquivos importantes
-- (será preenchido conforme o projeto avança)
+- `api/creatives.js` — serverless function (Vercel) que busca o CSV da aba "identificação de anuncios" da planilha e retorna como JSON
+- `src/App.jsx` — busca por `utm_content` e preview inline do criativo (iframe do Drive)
+- `vite.config.js` — tem um middleware de dev que simula a serverless function localmente (`npm run dev` já funciona sem `vercel dev`)
+- `marca-sieg/design-guide.md` (no projeto-sieg) — guia de marca usado pro visual (linha Institucional)
 
 ## Regras específicas
-- Nunca commitar credenciais/API key da integração com Google Sheets em texto puro — sempre em `.env` (ignorado pelo git)
-- Como a planilha é restrita ao domínio @sieg, avaliar a forma de acesso (service account do Google, API key, ou publicação restrita) sem expor a planilha publicamente
+- A planilha foi deixada pública (Publicar na Web → CSV) por decisão do usuário — dado não sensível (links de criativos), decisão consciente do trade-off de acesso
+- ID da planilha e gid da aba têm fallback hardcoded em `api/creatives.js`, mas podem ser sobrescritos via env vars `GOOGLE_SHEET_ID` e `GOOGLE_SHEET_GID`
+- Visual segue a linha **SIEG · Institucional** (azul, claro) — nunca misturar com paleta Performance/Growth (roxo, escuro)
