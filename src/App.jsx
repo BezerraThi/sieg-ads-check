@@ -72,30 +72,16 @@ function App() {
             <div className="card" key={i}>
               <div className="card-header">
                 <p className="utm">{row["utm_content (anúncio)"]}</p>
-                <div className="card-actions">
-                  {fileId && (
-                    <a
-                      className="cta"
-                      href={`https://drive.google.com/uc?export=download&id=${fileId}`}
-                      aria-label="Baixar criativo"
-                      title="Baixar criativo"
-                    >
-                      ↓
-                    </a>
-                  )}
-                  {link && (
-                    <a
-                      className="cta"
-                      href={link}
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label="Abrir no Drive"
-                      title="Abrir no Drive"
-                    >
-                      →
-                    </a>
-                  )}
-                </div>
+                {link && (
+                  <a
+                    className="drive-btn"
+                    href={link}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    Buscar no Drive
+                  </a>
+                )}
               </div>
               {fileId && (
                 <iframe
@@ -104,6 +90,19 @@ function App() {
                   allow="autoplay"
                   title={row["utm_content (anúncio)"]}
                 />
+              )}
+              {fileId && (
+                <a
+                  className="download-btn"
+                  href={`https://drive.google.com/uc?export=download&id=${fileId}`}
+                >
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 15v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-3" />
+                    <polyline points="7 10 12 15 17 10" />
+                    <line x1="12" y1="15" x2="12" y2="3" />
+                  </svg>
+                  Baixar criativo
+                </a>
               )}
             </div>
           );
