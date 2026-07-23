@@ -72,17 +72,30 @@ function App() {
             <div className="card" key={i}>
               <div className="card-header">
                 <p className="utm">{row["utm_content (anúncio)"]}</p>
-                {link && (
-                  <a
-                    className="cta"
-                    href={link}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="Abrir no Drive"
-                  >
-                    →
-                  </a>
-                )}
+                <div className="card-actions">
+                  {fileId && (
+                    <a
+                      className="cta"
+                      href={`https://drive.google.com/uc?export=download&id=${fileId}`}
+                      aria-label="Baixar criativo"
+                      title="Baixar criativo"
+                    >
+                      ↓
+                    </a>
+                  )}
+                  {link && (
+                    <a
+                      className="cta"
+                      href={link}
+                      target="_blank"
+                      rel="noreferrer"
+                      aria-label="Abrir no Drive"
+                      title="Abrir no Drive"
+                    >
+                      →
+                    </a>
+                  )}
+                </div>
               </div>
               {fileId && (
                 <iframe

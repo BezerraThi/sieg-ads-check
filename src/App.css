@@ -121,6 +121,12 @@ header p {
   word-break: break-all;
 }
 
+.card-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
 .cta {
   flex-shrink: 0;
   width: 36px;
