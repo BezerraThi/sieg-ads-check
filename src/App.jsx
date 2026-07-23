@@ -1,6 +1,11 @@
 import { useEffect, useMemo, useState } from "react";
 import "./App.css";
 
+function driveFileId(url) {
+  const match = (url || "").match(/\/d\/([a-zA-Z0-9_-]+)/);
+  return match ? match[1] : null;
+}
+
 function App() {
   const [creatives, setCreatives] = useState([]);
   const [query, setQuery] = useState("");
@@ -55,16 +60,28 @@ function App() {
       )}
 
       <div className="results">
-        {results.map((row, i) => (
-          <div className="card" key={i}>
-            <p className="utm">{row["utm_content (anúncio)"]}</p>
-            {row["Link do anúncio"] && (
-              <a href={row["Link do anúncio"]} target="_blank" rel="noreferrer">
-                Ver criativo →
-              </a>
-            )}
-          </div>
-        ))}
+        {results.map((row, i) => {
+          const fileId = driveFileId(row["Link do anúncio"]);
+          return (
+            <div className="card" key={i}>
+              <p className="utm">{row["utm_content (anúncio)"]}</p>
+              {fileId ? (
+                <iframe
+                  className="preview"
+                  src={`https://drive.google.com/file/d/${fileId}/preview`}
+                  allow="autoplay"
+                  title={row["utm_content (anúncio)"]}
+                />
+              ) : (
+                row["Link do anúncio"] && (
+                  <a href={row["Link do anúncio"]} target="_blank" rel="noreferrer">
+                    Ver criativo →
+                  </a>
+                )
+              )}
+            </div>
+          );
+        })}
       </div>
     </div>
   );
