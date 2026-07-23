@@ -35,18 +35,23 @@ function App() {
   return (
     <div className="page">
       <header>
+        <img className="selo" src="/sieg-selo.png" alt="" />
+        <span className="tag">SIEG · Institucional</span>
         <h1>Ads Check</h1>
         <p>Cole a utm_content do lead pra ver qual anúncio gerou o MQL.</p>
       </header>
 
-      <input
-        className="search"
-        type="text"
-        placeholder="Buscar por utm_content..."
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        autoFocus
-      />
+      <div className="search-box">
+        <img className="search-icon" src="/search-icon.png" alt="" />
+        <input
+          className="search"
+          type="text"
+          placeholder="Buscar por utm_content..."
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          autoFocus
+        />
+      </div>
 
       {status === "loading" && <p className="hint">Carregando planilha...</p>}
       {status === "error" && (
@@ -62,27 +67,40 @@ function App() {
       <div className="results">
         {results.map((row, i) => {
           const fileId = driveFileId(row["Link do anúncio"]);
+          const link = row["Link do anúncio"];
           return (
             <div className="card" key={i}>
-              <p className="utm">{row["utm_content (anúncio)"]}</p>
-              {fileId ? (
+              <div className="card-header">
+                <p className="utm">{row["utm_content (anúncio)"]}</p>
+                {link && (
+                  <a
+                    className="cta"
+                    href={link}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="Abrir no Drive"
+                  >
+                    →
+                  </a>
+                )}
+              </div>
+              {fileId && (
                 <iframe
                   className="preview"
                   src={`https://drive.google.com/file/d/${fileId}/preview`}
                   allow="autoplay"
                   title={row["utm_content (anúncio)"]}
                 />
-              ) : (
-                row["Link do anúncio"] && (
-                  <a href={row["Link do anúncio"]} target="_blank" rel="noreferrer">
-                    Ver criativo →
-                  </a>
-                )
               )}
             </div>
           );
         })}
       </div>
+
+      <footer>
+        <span>SIEG · Institucional</span>
+        <span>sieg.com.br</span>
+      </footer>
     </div>
   );
 }
